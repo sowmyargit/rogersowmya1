@@ -1,0 +1,22 @@
+name: DocuSign Test Workflow
+
+on:
+  workflow_dispatch:   # Lets you run manually
+
+jobs:
+  docusign-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Print account info from secrets
+        run: |
+          echo "Client ID: $DOCUSIGN_CLIENT_ID"
+          echo "Account ID: $DOCUSIGN_ACCOUNT_ID"
+          echo "Base Path: $DOCUSIGN_BASE_PATH"
+        env:
+          DOCUSIGN_CLIENT_ID: ${{ secrets.DOCUSIGN_CLIENT_ID }}
+          DOCUSIGN_ACCOUNT_ID: ${{ secrets.DOCUSIGN_ACCOUNT_ID }}
+          DOCUSIGN_BASE_PATH: ${{ secrets.DOCUSIGN_BASE_PATH }}
