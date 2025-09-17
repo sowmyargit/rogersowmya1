@@ -1,0 +1,28 @@
+name: palindrome-check
+description: >
+  A small program that checks whether a given string (word or phrase)
+  is a palindrome. Non-alphanumeric characters are ignored and comparison is case-insensitive.
+language: python
+code: |
+  def is_palindrome(s: str) -> bool:
+      """Return True if s is a palindrome (ignoring non-alphanumerics & case)."""
+      normalized = ''.join(ch.lower() for ch in s if ch.isalnum())
+      return normalized == normalized[::-1]
+
+  if __name__ == "__main__":
+      import sys
+      if len(sys.argv) > 1:
+          text = ' '.join(sys.argv[1:])
+      else:
+          text = input("Enter text: ")
+      print("Palindrome" if is_palindrome(text) else "Not palindrome")
+usage:
+  - run_with_input_prompt: python palindrome.py
+  - run_with_args: python palindrome.py "A man, a plan, a canal: Panama"
+example:
+  input: "A man, a plan, a canal: Panama"
+  normalized: "amanaplanacanalpanama"
+  output: "Palindrome"
+notes: >
+  - You can replace the python code under `code` with other languages if you want.
+  - The program treats only letters and digits; punctuation and spaces are ignored.

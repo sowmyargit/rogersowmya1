@@ -1,0 +1,27 @@
+base_path = "https://demo.docusign.net/restapi"
+account_id = "YOUR_ACCOUNT_ID"
+access_token = "YOUR_ACCESS_TOKEN"
+
+api_client = ApiClient()
+api_client.set_base_path(base_path)
+api_client.set_default_header("Authorization", "Bearer " + access_token)
+
+envelopes_api = EnvelopesApi(api_client)
+
+envelope_definition = EnvelopeDefinition(
+    email_subject="Please sign this document",
+    documents=[Document(
+        document_base64="SGVsbG8sIERvY3VT...",
+        name="TestDoc",
+        file_extension="txt",
+        document_id="1"
+    )],
+    recipients=Recipients(signers=[Signer(
+        email="user@example.com",
+        name="User Name",
+        recipient_id="1",
+        routing_order="1",
+        tabs={"sign_here_tabs": [SignHere(anchor_string="/sig1/", anchor_units="pixels", anchor_y_offset="10", anchor_x_offset="20")]}
+    )]),
+    status="sent"
+)
